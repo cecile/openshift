@@ -34,15 +34,25 @@ var NodeApp = function() {
 
         self.mongoHost = process.env.OPENSHIFT_MONGODB_DB_HOST;
         self.mongoPort = process.env.OPENSHIFT_MONGODB_DB_PORT;
+        self.mongoUser = process.env.OPENSHIFT_MONGODB_DB_USERNAME;
+        self.mongoPass = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
 
         if ( (typeof self.mongoHost === "undefined") || (typeof self.mongoPort === "undefined" ) ){
 
-            console.error('No MongoDB configuration, setup OPENSHIFT_MONGODB_DB_HOST & OPENSHIFT_MONGODB_DB_PORT');
+            console.error('No MongoDB host configuration, setup OPENSHIFT_MONGODB_DB_HOST & OPENSHIFT_MONGODB_DB_PORT');
 
             return false;
         }
 
-        self.mongoURL = "mongodb://"+self.mongoHost+":"+self.mongoPort+"/"
+        if ( (typeof self.mongoUser === "undefined") || (typeof self.mongoPass === "undefined" ) ){
+
+            console.error('No MongoDB user configuration, setup OPENSHIFT_MONGODB_DB_USERNAME & OPENSHIFT_MONGODB_DB_PASSWORD');
+
+            return false;
+        }
+
+
+        self.mongoURL = "mongodb://"+self.mongoUser+":"+self.mongoPass+"@"+self.mongoHost+":"+self.mongoPort+"/"
 
         return true;
     };
@@ -126,8 +136,8 @@ var NodeApp = function() {
 
         // Connect to MongoDB        
         mongoose.connect(self.mongoURL);
-        console.log('%s: MongoDB connected on %s ...',
-                    Date(Date.now() ), self.mongoURL);
+        console.log('%s: MongoDB connected to %s:%d ...',
+                    Date(Date.now() ), self.mongoHost,self.mongoPort);
 
         //  Start the app on the specific interface (and port).
         self.app.listen(self.port, self.ipaddress, function() {
