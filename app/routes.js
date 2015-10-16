@@ -13,7 +13,7 @@
 	    /**
 	     *  Populate the cache.
 	     */
-	    self.populateCache = function() {
+	    self.cache = function() {
 	        if (typeof self.zcache === "undefined") {
 	            self.zcache = { 'index.html': '' };
 	        }
@@ -27,10 +27,10 @@
 	     *  Retrieve entry (content) from cache.
 	     *  @param {string} key  Key identifying content to retrieve from cache.
 	     */
-	    self.cache_get = function(key) { return self.zcache[key]; };
+	    self.getCache = function(key) { return self.zcache[key]; };
 
 	    // populate the cache
-        self.populateCache();
+        self.cache();
 
 		// server routes ===========================================================
 		// handle things like api calls
@@ -49,7 +49,7 @@
 			//res.sendfile('./static/index.html'); // load our public/index.html file
 
             res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('index.html') );			
+            res.send(self.getCache('index.html') );			
 
 		});
 
