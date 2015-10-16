@@ -1,5 +1,6 @@
-
  // app/routes.js
+
+ 	var fs          = require('fs');
 
 	// set up the RESTful API, handler methods are defined in api.js
 	//var api = require('./api.js');
