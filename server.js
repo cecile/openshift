@@ -36,7 +36,7 @@ var NodeApp = function() {
         self.mongoHost = process.env.OPENSHIFT_MONGODB_DB_HOST;
         self.mongoPort = process.env.OPENSHIFT_MONGODB_DB_PORT;
 
-        if ( (typeof self.mongoHost === "undefined") || (typeof self.mongoPort === "undefined" ) {
+        if ( (typeof self.mongoHost === "undefined") || (typeof self.mongoPort === "undefined" ) ){
 
             console.error('No MongoDB configuration, setup OPENSHIFT_MONGODB_DB_HOST & OPENSHIFT_MONGODB_DB_PORT');
 
