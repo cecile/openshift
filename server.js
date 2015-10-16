@@ -43,7 +43,7 @@ var NodeApp = function() {
             return false;
         }
 
-        self.mongoURL = "mongodb://"+self.mongoURL+":"+self.mongoPort+"/"
+        self.mongoURL = "mongodb://"+self.mongoHost+":"+self.mongoPort+"/"
 
         return true;
     };
