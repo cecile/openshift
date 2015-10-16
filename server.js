@@ -133,6 +133,14 @@ var NodeApp = function() {
         //self.createRoutes();
         require('./app/routes')(self.app); // configure our routes
 
+
+        self.app.configure(function() {
+            self.app.use(express.static(__dirname + '/static'));     // set the static files location /public/img will be /img for users
+            self.app.use(express.logger('dev'));                     // log every request to the console         
+            self.app.use(express.bodyParser());                      // have the ability to pull information from html in POST
+            self.app.use(express.methodOverride());                  // have the ability to simulate DELETE and PUT
+        });        
+
     };
 
 
