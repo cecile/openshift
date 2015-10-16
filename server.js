@@ -8,7 +8,7 @@ var mongoose    = require('mongoose');
 /**
  *  Define the sample application.
  */
-var SampleApp = function() {
+var NodeApp = function() {
 
     //  Scope.
     var self = this;
@@ -32,6 +32,20 @@ var SampleApp = function() {
             console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
             self.ipaddress = "127.0.0.1";
         };
+
+        self.mongoHost = process.env.OPENSHIFT_MONGODB_DB_HOST;
+        self.mongoPort = process.env.OPENSHIFT_MONGODB_DB_PORT;
+
+        if ( (typeof self.mongoHost === "undefined") || (typeof self.mongoPort === "undefined" ) {
+
+            console.error('No MongoDB configuration, setup OPENSHIFT_MONGODB_DB_HOST & OPENSHIFT_MONGODB_DB_PORT');
+
+            return false;
+        }
+
+        self.mongoURL = "mongodb://"+self.mongoURL+":"+self.mongoPort+"/"
+
+        return true;
     };
 
 
@@ -127,12 +141,18 @@ var SampleApp = function() {
      *  Initializes the sample application.
      */
     self.initialize = function() {
-        self.setupVariables();
+
+        if (!self.setupVariables()){
+            return false;
+        }
+
         self.populateCache();
         self.setupTerminationHandlers();
 
         // Create the express server and routes.
         self.initializeServer();
+
+        return true;
     };
 
 
@@ -140,6 +160,12 @@ var SampleApp = function() {
      *  Start the server (starts up the sample application).
      */
     self.start = function() {
+
+        // Connect to MongoDB        
+        mongoose.connect(self.mongoURL);
+        console.log('%s: MongoDB connected on %s ...',
+                    Date(Date.now() ), self.mongoURL);
+
         //  Start the app on the specific interface (and port).
         self.app.listen(self.port, self.ipaddress, function() {
             console.log('%s: Node server started on %s:%d ...',
@@ -154,7 +180,13 @@ var SampleApp = function() {
 /**
  *  main():  Main code.
  */
-var zapp = new SampleApp();
-zapp.initialize();
-zapp.start();
+var app = new NodeApp();
+
+if( app.initialize() ){
+
+    app.start();    
+
+    exports = module.exports = app; 
+}
+
 
