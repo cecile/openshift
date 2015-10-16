@@ -18,7 +18,7 @@
 	            self.zcache = { 'index.html': '' };
 	        }
 
-	        //  Local cache for static content.
+	        //  Local cach for static content.cache
 	        self.zcache['index.html'] = fs.readFileSync('./static/index.html');
 	    };
 
