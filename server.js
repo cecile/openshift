@@ -127,13 +127,12 @@ var NodeApp = function() {
      *  the handlers.
      */
     self.initializeServer = function() {
-        self.createRoutes();
+        
         self.app = express();
 
-        //  Add handlers for the app (from the routes).
-        for (var r in self.routes) {
-            self.app.get(r, self.routes[r]);
-        }
+        //self.createRoutes();
+        require('./app/routes')(self.app); // configure our routes
+
     };
 
 
