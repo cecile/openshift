@@ -3,7 +3,7 @@
  	var fs          = require('fs');
 
 	// set up the RESTful API, handler methods are defined in api.js
-	//var api = require('./api.js');
+	var api = require('./api.js');
 	
 	module.exports = function(app) {
 
@@ -37,11 +37,11 @@
 		// authentication routes
 		
 		// api routes
-/*		app.get('/api/list', api.listItems);
+		app.get('/api/list', api.listItems);
 		app.post('/api/list', api.postItem);
 		app.delete('/api/list/:id', api.deleteItem);
 		app.put('/api/list/:id', api.updateItem);
-*/		
+		
 
 		// frontend routes =========================================================
 		// route to handle all angular requests
