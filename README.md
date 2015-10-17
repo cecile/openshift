@@ -1,3 +1,104 @@
-The OpenShift `nodejs` cartridge documentation can be found at:
+#MEAN examples on OpenShift
+Work in progress examples for creating a NodeJS / Express / MongoDB RESTFull API with a AngularJS/Boostrap client under OpenShift
 
-http://openshift.github.io/documentation/oo_cartridge_guide.html#nodejs
+#PREREQUISITES
+Setup you Open Shift client tools
+
+https://developers.openshift.com/en/getting-started-overview.html
+
+$ rhc setup
+
+#SETUP ON OpenShift
+
+$ rhc app create <app name> nodejs-0.10 mongodb-2.4 -s --from-code=https://github.com/cecile/openshift.git
+
+#BUILD IN OpenShift
+
+$ rhc push origin master
+
+#SETUP ON LOCAL
+
+- Install NodeJS
+  http://nodejs.org/
+
+- Add Bower
+  $ npm install -g bower
+
+- Instal Node application modules
+  $ npm install
+
+- Install scripts
+  $ bower install
+
+- Install MongoDB
+  http://www.mongodb.org/downloads
+
+- Launch MongoDB
+  $ mongod --dbpath <path to existing or new db folder>
+
+- Add admin user to MongoDB
+  $ mongo
+  > use admin
+  > db.createUser(
+    {
+      user: "<user>",
+      pwd: "<pass>",
+      roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+    }
+  )
+
+- Set Environment variables
+
+  OPENSHIFT_NODEJS_IP
+  OPENSHIFT_NODEJS_PORT
+
+  OPENSHIFT_MONGODB_DB_HOST
+  OPENSHIFT_MONGODB_DB_PORT
+  OPENSHIFT_MONGODB_DB_USERNAME
+  OPENSHIFT_MONGODB_DB_PASSWORD
+
+#BUILD IN LOCAL
+
+- Update bower libraries
+  $ bower install
+
+- Launch NodeJS app
+  $npm start
+
+#FILES
+
+- Server Side
+| ---------------------- | --------------------- |
+| Node Server            | ./server.js           |
+| ---------------------- | --------------------- |
+| Express Application    | ./app/routes.js       |
+|                        | ./app/api.js          |
+| ---------------------- | --------------------- |
+| MongoDB JS models      | ./app/models          |
+| ---------------------- | --------------------- |
+| Node Modules           | ./package.json        |
+| ---------------------- | --------------------- |
+
+- Client Side
+
+| ---------------------- | ------------------------ |
+| Bower                  | ./bower.json             |
+|                        | ./.bowerrc               |
+|                        | ./static/libs            |
+| ---------------------- | ------------------------ |	
+| Sinple Page HTML       | ./static/index.html      |
+| ---------------------- | ------------------------ |
+| AngularJS code         | ./static/js/app.js       |
+|                        | ./static/js/appRoutes.js |
+| ---------------------- | ------------------------ |
+| AngularJS Services     | ./static/js/services     |
+| ---------------------- | ------------------------ |
+| AngularJS Controllers  | ./static/js/controllers  |
+| ---------------------- | ------------------------ |
+| AngularJS Views        | ./static/views           |
+| ---------------------- | ------------------------ |
+
+#REFERENCES
+
+Based on
+https://github.com/cecile/meanexample
