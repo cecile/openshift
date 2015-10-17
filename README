@@ -21,14 +21,8 @@ $ rhc push origin master
 - Install NodeJS
   http://nodejs.org/
 
-- Add Bower
-  $ npm install -g bower
-
 - Instal Node application modules
   $ npm install
-
-- Install scripts
-  $ bower install
 
 - Install MongoDB
   http://www.mongodb.org/downloads
