@@ -1,5 +1,7 @@
 #MEAN examples on OpenShift
-Work in progress examples for creating a NodeJS / Express / MongoDB RESTFull API with a AngularJS/Boostrap client under OpenShift
+Work in progress examples for creating a NodeJS / Express / MongoDB RESTFull API with a AngularJS/Boostrap client under OpenShift PaaS
+
+Everything is prepare in a docker style app, when you build will install node modules and bower libraries
 
 #PREREQUISITES
 Setup you Open Shift client tools
@@ -20,9 +22,6 @@ $ rhc push origin master
 
 - Install NodeJS
   http://nodejs.org/
-
-- Instal Node application modules
-  $ npm install
 
 - Install MongoDB
   http://www.mongodb.org/downloads
@@ -53,11 +52,8 @@ $ rhc push origin master
 
 #BUILD IN LOCAL
 
-- Update bower libraries
-  $ bower install
-
-- Launch NodeJS app
-  $npm start
+ $ npm install
+ $ npm start
 
 #FILES
 

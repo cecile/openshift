@@ -1,22 +1,23 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "mean-example",
   "version": "1.0.0",
-  "description": "OpenShift Sample Application",
+  "description": "M.E.A.N. example on OpenShift",
   "keywords": [
     "OpenShift",
     "Node.js",
     "application",
-    "openshift"
+    "openshift",
+    "mean"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url": "http://www.openshift.com/"
+    "name": "Juan Medina",
+    "email": "jamedina@gmail.com",
+    "url": "http://www.juan-medina.com/"
   },
-  "homepage": "http://www.openshift.com/",
+  "homepage": "http://www.juan-medina.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openshift/origin-server"
+    "url": "https://github.com/cecile/openshift"
   },
 
   "engines": {
